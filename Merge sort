@@ -1,4 +1,4 @@
-#QUESTION
+<H1>QUESTION</H1>
 ---
 Merge Sort 
 Medium Accuracy: 41.46% Submissions: 70797 Points: 4
@@ -28,7 +28,7 @@ Constraints:
 1 <= N <= 105
 1 <= arr[i] <= 103
 
-#SOLUTION
+<H1>SOLUTION</H1>
 ---
 void merge(int arr[], int l, int m, int r)
     {
