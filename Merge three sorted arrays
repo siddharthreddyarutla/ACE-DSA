@@ -1,0 +1,96 @@
+Q)Merge three sorted arrays
+
+Given three sorted arrays A, B and C of size N, M and P respectively. The task is to merge them into a single array which must be sorted in increasing order.
+
+Example 1:
+
+Input: 
+N = 4, A[] = [1 2 3 4] 
+M = 5, B[] = [1 2 3 4 5] 
+P = 6, C[] = [1 2 3 4 5 6]
+Output: 1 1 1 2 2 2 3 3 3 4 4 4 5 5 6
+Explanation: Merging these three sorted 
+arrays, we have: 
+1 1 1 2 2 2 3 3 3 4 4 4 5 5 6.
+Example 2:
+
+Input: 
+N = 2, A[] = [1 2]
+M = 3, B[] = [2 3 4] 
+P = 4, C[] = [4 5 6 7]
+Output: 1 2 2 3 4 4 5 6 7
+Explanation: Merging three sorted arrays, 
+we have: 1 2 2 3 4 4 5 6 7.
+
+Your Task:
+This is a function problem. You only need to complete the function mergeThree() that takes A,B,C as parameters. The function returns an array or vector.
+
+Expected Time Complexity: O(N + M + P)
+Expected Auxiliary Space: O(N + M + P) for the resultant array only.
+
+Constraints:
+1 <= N, M, P <= 106
+1 <= A[i], B[i], C[i] <= 106
+
+SOLUTION:
+
+vector<int> mergeThree(vector<int>& A, vector<int>& B, vector<int>& C) 
+    { 
+        //Your code here
+        vector<int> result;
+        int i = 0;
+        int j = 0;
+        while(i < A.size() && j < B.size())
+        {
+            if(A[i] <= B[j])
+            {
+                result.push_back(A[i++]);
+                
+            }
+            else
+            {
+                result.push_back(B[j++]);
+                
+            }
+            
+        }
+        while(i < A.size())
+        {
+            result.push_back(A[i++]);
+            
+        }
+        while(j < B.size())
+        {
+            result.push_back(B[j++]);
+            
+        }
+        i = 0;
+        j = 0;
+        vector<int> value;
+        while(i < result.size() && j < C.size())
+        {
+            if(result[i] < C[j])
+            {
+                value.push_back(result[i++]);
+                
+            }
+            else
+            {
+                value.push_back(C[j++]);
+                
+            }
+            
+        }
+        while(i < result.size())
+        {
+            value.push_back(result[i++]);
+            
+        }
+        while(j < C.size())
+        {
+            value.push_back(C[j++]);
+            
+        }
+        //result.clear();
+        return value;
+    } 
