@@ -1,7 +1,5 @@
-<H1>QUESTION</H1>
----
-Merge Sort 
-Medium Accuracy: 41.46% Submissions: 70797 Points: 4
+Q)Merge Sort 
+
 Given an array arr[], its starting position l and its ending position r. Sort the array using merge sort algorithm.
 Example 1:
 
@@ -28,9 +26,8 @@ Constraints:
 1 <= N <= 105
 1 <= arr[i] <= 103
 
-<H1>SOLUTION</H1>
----
-> 
+SOLUTION:
+
 void merge(int arr[], int l, int m, int r)
     {
          int n1=m-l+1;
@@ -88,3 +85,4 @@ void merge(int arr[], int l, int m, int r)
             mergeSort(arr,m+1,r);
             merge(arr,l,m,r);
         }
+     }
