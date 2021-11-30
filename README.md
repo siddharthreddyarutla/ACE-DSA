@@ -1,8 +1,8 @@
 # Ace-DSA
 Hi there, here is  the new kickstart to ace DSA for beginners, you will be finding solutions for many problems which will level you up to crack placements and also for coding enthusiast.
 
-<br>
 #QUESTION
+
 Merge Sort 
 Given an array arr[], its starting position l and its ending position r. Sort the array using merge sort algorithm.
 Example 1:
@@ -32,8 +32,14 @@ Constraints:
 
 # SOLUTION
 
-void merge(int arr[], int l, int m, int r)
+
+
+
+
+    void merge(int arr[], int l, int m, int r)  
+    
     {
+        
          int n1=m-l+1;
          int n2=r-m;
          
@@ -89,3 +95,4 @@ void merge(int arr[], int l, int m, int r)
             mergeSort(arr,m+1,r);
             merge(arr,l,m,r);
         }
+    }
