@@ -33,7 +33,7 @@ Constraints:
 1 <= K <= N <= 105
 1 <= A[i] <= 105 , for each valid i
 
-solution:
+SOLUTION:
 
 vector <int> countDistinct (int A[], int n, int k)
     {
