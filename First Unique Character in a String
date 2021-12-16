@@ -1,0 +1,64 @@
+question:  First Unique Character in a String
+
+Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+
+ 
+
+Example 1:
+
+Input: s = "leetcode"
+Output: 0
+Example 2:
+
+Input: s = "loveleetcode"
+Output: 2
+Example 3:
+
+Input: s = "aabb"
+Output: -1
+ 
+
+Constraints:
+
+1 <= s.length <= 105
+s consists of only lowercase English letters
+
+SOLUTION:
+
+
+const int CHAR=256;
+    int firstUniqChar(string s) 
+    {
+        int arr[CHAR];
+        fill(arr,arr+256,-1);
+        for(int i=0;i<s.length();i++)
+        {
+            if(arr[s[i]]==-1)
+            {
+                arr[s[i]]=i;
+            }
+            else
+            {
+                arr[s[i]]=-2;
+            }
+        }
+        int res=INT_MAX;
+        for(int i=0;i<CHAR;i++)
+        {
+            if(arr[i]>=0)
+            {
+                res=min(res,arr[i]);
+            }
+        }
+        if(res==INT_MAX)
+        {
+            return -1;
+        }
+        else
+        {
+            return res;
+        }
+    
+        
+    }
+
