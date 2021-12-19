@@ -1,0 +1,81 @@
+QUESTION: Rabin Karp - Pattern Searching
+
+Given a string S and a pattern P of lowercase characters. The task is to check if the pattern is present in string or not.
+
+Example 1:
+
+Input:
+S = aabaacaadaabaaba
+P = aaba
+Output: Yes
+Explanation: You can find the patter at
+starting at index 12.
+Example 2:
+
+Input:
+S = aabaacaadaabaaba
+P = asdfa
+Output: No
+Explanation: Pattern doesn't exist in
+the given string S.
+Your Task:
+You need to complete the function search which takes 3 arguments(S, P and prime q) and returns true if the pattern is found else returns false.
+
+Expected Time Complexity: O(N + M).
+Expected Auxiliary Space: O(1).
+Note: N = |S|, M = |P|.
+
+Constraints:
+1 <= |S|, |P| <= 104
+
+SOLUTION:
+
+#define d 256 
+
+//Function to check if the pattern is present in string or not.
+bool search(string pat, string txt, int q) 
+{ 
+	// Your code here
+	int m=pat.length();
+	int n=txt.length();
+	int h=1;
+	int i,j;
+	for(i=0;i<m-1;i++)
+	{
+	    h=(h*d)%q;
+	}
+	int p=0,t=0;
+	for(i=0;i<m;i++)
+	{
+	    p=(d*p + pat[i])%q;
+	    t=(t*d + txt[i])%q;
+	}
+	
+	for(i=0;i<=n-m;i++)
+	{
+	    if(p==t)
+	    {
+	        int j;
+	        for(j=0;j<m;j++)
+	        {
+	            if(txt[i+j]!=pat[j])
+	            {
+	                break;
+	            }
+	        }
+	        if(j==m)
+	        {
+	            return true;
+	        }
+	    }
+	    if(i<n-m)
+	    {
+	        t=(d*(t-txt[i]*h)+txt[i+m])%q;
+	        if(t<0)
+	        {
+	            t=(t+q);
+	        }
+	    }
+	}
+	return false;
+} 
