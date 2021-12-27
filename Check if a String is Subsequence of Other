@@ -1,0 +1,58 @@
+QUESTION;  Check if a String is Subsequence of Other
+
+Given two strings A and B, find if A is a subsequence of B. A subsequence is a sequence that can be derived from another sequence by deleting some elements without changing the order of the remaining elements.
+
+
+Example 1:
+
+Input:
+A = AXY 
+B = YADXCP
+Output: 0 
+Explanation: A is not a subsequence of B
+as 'Y' appears before 'A'.
+
+Example 2:
+
+Input:
+A = gksrek
+B = geeksforgeeks
+Output: 1
+Explanation: A is a subsequence of B.
+ 
+
+Your Task:  
+You dont need to read input or print anything. Complete the function isSubSequence() which takes A and B as input parameters and returns a boolean value denoting if A is a subsequence of B or not. 
+
+ 
+
+Expected Time Complexity: O(N) where N is length of string B.
+Expected Auxiliary Space: O(1)
+
+
+Constraints:
+1<= |A|,|B| <=106
+
+SOLUTION:
+
+bool isSubSequence(string A, string B)
+    {
+        //code here
+        int n=B.length();
+        int m=A.length();
+        if(n<m)
+        return false;
+        int j=0;
+        for(int i=0;i<n;i++)
+        {
+            if(A[j]==B[i])
+            {
+                j++;
+            }
+        }
+        if(j==m)
+        {
+            return true;
+        }
+        return false;
+    }
