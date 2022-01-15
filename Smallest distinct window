@@ -1,0 +1,101 @@
+QUESTION:  Smallest distinct window
+Given two strings S and P. Find the smallest window in the string S consisting of all the characters(including duplicates) of the string P.  Return "-1" in case there is no such window present. In case there are multiple such windows of same length, return the one with the least starting index. 
+
+Example 1:
+
+Input:
+S = "timetopractice"
+P = "toc"
+Output: 
+toprac
+Explanation: "toprac" is the smallest
+substring in which "toc" can be found.
+Example 2:
+
+Input:
+S = "zoomlazapzo"
+P = "oza"
+Output: 
+apzo
+Explanation: "apzo" is the smallest 
+substring in which "oza" can be found.
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function smallestWindow() which takes two string S and P as input paramters and returns the smallest window in string S having all the characters of the string P. In case there are multiple such windows of same length, return the one with the least starting index. 
+
+Expected Time Complexity: O(|S|)
+Expected Auxiliary Space: O(1)
+
+Constraints: 
+1 ≤ |S|, |P| ≤ 105
+
+SOLUTION:
+
+// { Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+class Solution{
+    public:
+    string findSubString(string str)
+    {
+        // Your code goes here   
+        unordered_set<char>s;
+    for(int i=0;i<str.size();i++){
+        s.insert(str[i]);
+    }
+    
+    int uniqueEle=s.size();
+    int f=0;
+    int len=INT_MAX;
+    unordered_map<char,int>mp;
+    
+      int k=0;
+        for(int j=0;j<str.size();j++)
+        { 
+          mp[str[j]]+=1;
+          if(mp.size()==uniqueEle){
+              //i.e means all unique element present in this window
+              
+              //case 1-remove the element from left side and minimize the window size
+               while(k<=j and mp.size()==uniqueEle){
+                   int temp=mp[str[k]]-1;
+                   if(temp==0){
+                       //possible answer
+                       int diff=j-k+1;
+                       if(len>diff){
+                           f=k;
+                           len=diff;
+                       }
+                       break;
+                       
+                   }else{
+                       mp[str[k]]--;
+                          k++;
+                   }
+               }
+           }
+              
+        }
+       
+    string ans=str.substr(f,len);
+    return ans;
+   
+    }
+};
+
+// { Driver Code Starts.
+// Driver code
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+
+        string str;
+        cin >> str;
+        Solution ob;
+        cout << ob.findSubString(str).size() << endl;
+    }
+    return 0;
+}  // } Driver Code Ends
