@@ -1,0 +1,54 @@
+QUESTION: Nth number made of prime digits 
+
+Given a number 'N'. The task is to find the Nth number whose each digit is a prime number i.e 2, 3, 5, 7. In other words you have to find nth number of this sequence : 2, 3, 5, 7, 22, 23 ,.. and so on.
+
+Example 1:
+
+Input:
+N = 10
+Output: 33
+Explanation:10th number in the sequence of
+numbers whose each digit is prime is 33.
+Example 2:
+
+Input:
+N = 21
+Output: 222
+Explanation:21st number in the sequence of
+numbers whose each digit is prime is 222.
+Your Task:
+Complete primeDigits function and return the nth number of the given sequence made of prime digits.
+
+Constraints:
+1 <= N <= 100 
+
+SOLUTION:
+
+class Solution
+{
+    public:
+    //Function to find nth number made of only prime digits.
+    int primeDigits(int n)
+    {
+        //code here
+        vector<int> v;
+       v.push_back(2),v.push_back(3),v.push_back(5),v.push_back(7);
+       int i=22;
+       while(v.size()<101)
+       {
+           int p=i;
+
+            while(p%10>0)
+            {
+               int k=p%10;
+               if(k==2 || k==3 || k==5 || k==7)
+               p = p/10;
+               else
+               break;
+           }
+           if(p==0) v.push_back(i);
+           i++;
+       }
+       return v[n-1];
+    }
+};
