@@ -1,0 +1,171 @@
+Given Pointer/Reference to the head of the linked list, the task is to Sort the given linked list using Merge Sort.
+Note: If the length of linked list is odd, then the extra node should go in the first list while splitting.
+
+Example 1:
+
+Input:
+N = 5
+value[]  = {3,5,2,4,1}
+Output: 1 2 3 4 5
+Explanation: After sorting the given
+linked list, the resultant matrix
+will be 1->2->3->4->5.
+Example 2:
+
+Input:
+N = 3
+value[]  = {9,15,0}
+Output: 0 9 15
+Explanation: After sorting the given
+linked list , resultant will be
+0->9->15.
+Your Task:
+For C++ and Python: The task is to complete the function mergeSort() which sort the linked list using merge sort function.
+For Java: The task is to complete the function mergeSort() and return the node which can be used to print the sorted linked list.
+
+Expected Time Complexity: O(N*Log(N))
+Expected Auxiliary Space: O(N)
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 105
+
+solution:
+
+// { Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node
+{
+	int data;
+	struct Node *next, *prev;
+	
+	Node (int x){
+	    data = x;
+	    next = NULL;
+	    prev = NULL;
+	}
+};
+
+
+ // } Driver Code Ends
+/*
+Structure of the node of the list is as
+struct Node
+{
+	int data;
+	struct Node *next, *prev;
+	Node (int x){
+	    data = x;
+	    next = prev = NULL;
+	}
+}; */
+
+
+Node *merge(Node *first,Node *second)
+{
+    if(!first)
+    {
+        return second;
+    }
+    if(!second)
+    {
+        return first;
+    }
+    if(first->data>second->data)
+    {
+        return merge(second,first);
+    }
+    Node *ans=merge(first->next,second);
+    first->next=ans;
+    ans->prev=first;
+    return first;
+}
+//Function to sort the given doubly linked list using Merge Sort.
+struct Node *sortDoubly(struct Node *head)
+{
+	// Your code here
+	if(!head || !head->next)
+{
+    return head;
+}
+Node *slow=head,*fast=head,*prev=head;
+while(fast && fast->next)
+{
+    prev=slow;
+    slow=slow->next;
+    fast=fast->next->next;
+}
+prev->next=NULL;
+slow->prev=NULL;
+Node *first=sortDoubly(head);
+Node *second=sortDoubly(slow);
+head=merge(first,second);
+return head;
+}
+
+
+
+// { Driver Code Starts.
+
+void insert(struct Node **head, int data)
+{
+	struct Node *temp = new Node (data);
+	if (!(*head))
+		(*head) = temp;
+	else
+	{
+		temp->next = *head;
+		(*head)->prev = temp;
+		(*head) = temp;
+	}
+}
+
+void print(struct Node *head)
+{
+	struct Node *temp = head;
+	while (head)
+	{
+		cout<<head->data<<' ';
+		temp = head;
+		head = head->next;
+	}
+	cout<<endl;
+	while (temp)
+	{
+		cout<<temp->data<<' ';
+		temp = temp->prev;
+	}
+	cout<<endl;
+}
+
+// Utility function to swap two integers
+void swap(int *A, int *B)
+{
+	int temp = *A;
+	*A = *B;
+	*B = temp;
+}
+
+
+// Driver program
+int main(void)
+{
+    long test;
+    cin>>test;
+    while(test--)
+    {
+        int n, tmp;
+        struct Node *head = NULL;
+        cin>>n;
+        while(n--){
+            cin>>tmp;
+            insert(&head, tmp);
+        }
+        head = sortDoubly(head);
+        print(head);
+    }
+	return 0;
+}
+  // } Driver Code Ends
