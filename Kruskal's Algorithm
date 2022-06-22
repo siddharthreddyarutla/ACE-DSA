@@ -1,0 +1,70 @@
+class Solution
+{
+public:
+
+struct node{
+    int u;
+    int v;
+    int wt;
+    node(int first, int second, int weight){
+        u = first;
+        v = second;
+        wt = weight;
+    }
+};
+
+int findParent(int v, vector<int> &parent){
+    if(v == parent[v]){
+        return v;
+    }
+    return parent[v] = findParent(parent[v], parent);
+}
+
+void Union(int u, int v, vector<int> &parent, vector<int> &rank){
+    u = findParent(u,parent);
+    v = findParent(v,parent);
+    if(rank[u] < rank[v]){
+        parent[u] = v;
+    }
+    else if(rank[v] < rank[u]){
+        parent[v] = u;
+    }
+    else{
+        parent[v] = u;
+        rank[u]++;
+    }
+}
+
+static bool comp(node a, node b){
+    return a.wt < b.wt;
+}
+
+//Function to find sum of weights of edges of the Minimum Spanning Tree.
+   int spanningTree(int v, vector<vector<int>> adj[])
+   {   
+       // Kruskal's Algorithm
+       vector<node> edges;
+       vector<int> rank(v), parent(v);
+       for(int i = 0; i < v; i++){
+           parent[i] = i;
+           rank[i] = 0;
+       }
+       
+       for(int i = 0; i < v; i++){
+           for(auto it : adj[i]){
+               edges.push_back(node(i, it[0], it[1]));
+           }
+       }
+       
+       sort(edges.begin(),edges.end(), comp);
+       
+       int sum = 0;
+       for(auto it : edges){
+           if(findParent(it.v,parent) != findParent(it.u,parent)){
+               sum += it.wt;
+               Union(it.v,it.u,parent,rank);
+           }
+       }
+       
+       return sum;
+   }
